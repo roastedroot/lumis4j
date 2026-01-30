@@ -1,0 +1,16 @@
+[package]
+name = "lumis"
+version = "0.1.0"
+
+[lib]
+name = "lumis"
+crate-type = ["cdylib"]
+
+[dependencies]
+# TODO: verify what's the best way to include more languages, separate packages, one big etc. etc.
+lumis = { version = "0.1", default-features = false, features = ["lang-rust", "lang-javascript"] }
+# lumis = { version = "0.1.1", features = ["all-languages"] }
+
+[profile.release]
+opt-level = 3
+# TODO: initialize grammars with https://github.com/bytecodealliance/wizer
