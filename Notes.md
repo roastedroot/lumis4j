@@ -7,6 +7,7 @@ Lumis looks promising
 - wrap the result? or just return byte[] and throw exceptions, try it a bit to see the best design - first attempt done
 - get-binaryen and full toolchain - done
 - The Wizer initialization step looks fragile and is basically "magic"
+- add rendered examples to the readme
 
 low priority:
 - nice to have: automate Theme enum generation

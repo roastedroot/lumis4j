@@ -56,15 +56,6 @@ System.out.println(result.string());
 lumis.close();
 ```
 
-**Output (Terminal/ANSI):**
-```
-console.log('Hello, World!');
-```
-
-**Output (HTML Inline with Dracula theme):**
-<pre class="athl" style="color: #f8f8f2; background-color: #282a36;"><code class="language-javascript" translate="no" tabindex="0"><div class="line" data-line="1"><span style="color: #bd93f9;">console</span><span style="color: #f8f8f2;">.</span><span style="color: #50fa7b;">log</span><span style="color: #f8f8f2;">(</span><span style="color: #f1fa8c;">&#39;Hello, World!&#39;</span><span style="color: #f8f8f2;">)</span><span style="color: #f8f8f2;">;</span>
-</div></code></pre>
-
 ### HTML Inline Formatter
 
 ```java
@@ -85,10 +76,6 @@ System.out.println(htmlResult.string());
 htmlLumis.close();
 ```
 
-**Output (HTML):**
-<pre class="athl" style="color: #c6d0f5; background-color: #303446;"><code class="language-java" translate="no" tabindex="0"><div class="line" data-line="1"><span style="color: #ca9ee6;">public</span> <span style="color: #ca9ee6;">class</span> <span style="color: #e5c890;">Hello</span> <span style="color: #949cbb;">&lbrace;</span> <span style="color: #949cbb;">&rbrace;</span>
-</div></code></pre>
-
 ### HTML Linked Formatter
 
 ```java
@@ -106,9 +93,6 @@ System.out.println(linkedResult.string());
 
 linkedLumis.close();
 ```
-
-**Output (HTML with CSS classes):**
-The HTML linked formatter outputs HTML with CSS classes instead of inline styles, allowing you to style multiple code blocks with a single stylesheet.
 
 ## How It Works
 
