@@ -83,3 +83,18 @@ fn consume_string(ptr: i32, len: i32) -> String {
     wasm_free(ptr as *mut u8);
     result
 }
+
+// Wizer configuration
+
+#[export_name = "wizer.initialize"]
+pub extern "C" fn init() {
+    // TODO: verify the invariant matrix to be triggered here
+
+    // github_dark | javascript | terminal
+    let formatter = TerminalBuilder::new()
+        .lang(Language::JavaScript)
+        .theme(Some(themes::get("github_dark").unwrap()))
+        .build()
+        .unwrap();
+    lumis::highlight("", formatter);
+}

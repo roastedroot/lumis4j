@@ -12,5 +12,4 @@ lumis = { version = "0.1", default-features = false, features = ["lang-rust", "l
 # lumis = { version = "0.1.1", features = ["all-languages"] }
 
 [profile.release]
-opt-level = 3
-# TODO: initialize grammars with https://github.com/bytecodealliance/wizer
+opt-level = 'z'
