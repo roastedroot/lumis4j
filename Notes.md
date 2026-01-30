@@ -6,6 +6,7 @@ Lumis looks promising
 - make Terminal output/html etc configurable
 - wrap the result? or just return byte[] and throw exceptions, try it a bit to see the best design
 - get-binaryen and full toolchain
+- The Wizer initialization step looks fragile and is basically "magic" ...
 
 low priority:
 - nice to have: automate Theme enum generation

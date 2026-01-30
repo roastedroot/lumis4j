@@ -386,6 +386,7 @@ dependencies = [
  "tree-sitter",
  "tree-sitter-diff",
  "tree-sitter-highlight",
+ "tree-sitter-java",
  "tree-sitter-javascript",
  "tree-sitter-language",
  "tree-sitter-rust",
@@ -686,6 +687,16 @@ dependencies = [
  "streaming-iterator",
  "thiserror",
  "tree-sitter",
+]
+
+[[package]]
+name = "tree-sitter-java"
+version = "0.23.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0aa6cbcdc8c679b214e616fd3300da67da0e492e066df01bcf5a5921a71e90d6"
+dependencies = [
+ "cc",
+ "tree-sitter-language",
 ]
 
 [[package]]

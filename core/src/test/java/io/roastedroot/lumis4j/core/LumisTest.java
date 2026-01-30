@@ -23,7 +23,7 @@ public class LumisTest {
         var result = lumis.highlight(code);
         var duration = (System.nanoTime() - before) / 1_000_000;
 
-        System.out.println("elapsed: " + duration);
+        // System.out.println("elapsed: " + duration);
         assertTrue(duration < MAX_EXEC_TIME_MS, "Highlighting took " + duration + " ms");
         return result;
     }
@@ -69,35 +69,46 @@ public class LumisTest {
         assertTrue(result.success());
         Approvals.verify(result.string());
     }
-    //
-    //    @Test
-    //    public void allDefaults() throws Exception {
-    //        // Arrange
-    //        var lumis = Lumis.builder().build();
-    //        var code = readCode("default");
-    //        var expectedResult = readResult("default");
-    //
-    //        // Act
-    //        var result = highlight(lumis, code);
-    //
-    //        // Assert
-    //        assertTrue(result.success());
-    //        assertArrayEquals(expectedResult, result.bytes());
-    //    }
 
-    //    @Test
-    //    public void unavailableLang() throws Exception {
-    //        // Arrange
-    //        var lumis = Lumis.builder().withLang("csv").build();
-    //        var code = readCode("csv");
-    //        // var expectedResult = readResult("rust");
-    //
-    //        // Act
-    //        var result = highlight(lumis, code);
-    //
-    //        // Assert
-    //        assertTrue(result.success());
-    //        System.out.println(result.string());
-    //        // assertArrayEquals(expectedResult, result.bytes());
-    //    }
+    @Test
+    public void allDefaults() throws Exception {
+        // Arrange
+        var lumis = Lumis.builder().build();
+        var code = readCode("default");
+
+        // Act
+        var result = highlight(lumis, code);
+
+        // Assert
+        assertTrue(result.success());
+        Approvals.verify(result.string());
+    }
+
+    @Test
+    public void csv() throws Exception {
+        // Arrange
+        var lumis = Lumis.builder().withLang("csv").build();
+        var code = readCode("csv");
+
+        // Act
+        var result = highlight(lumis, code);
+
+        // Assert
+        assertTrue(result.success());
+        Approvals.verify(result.string());
+    }
+
+    @Test
+    public void java() throws Exception {
+        // Arrange
+        var lumis = Lumis.builder().withLang(Lang.JAVA).withTheme(Theme.AURA_SOFT_DARK).build();
+        var code = readCode("java");
+
+        // Act
+        var result = highlight(lumis, code);
+
+        // Assert
+        assertTrue(result.success());
+        Approvals.verify(result.string());
+    }
 }

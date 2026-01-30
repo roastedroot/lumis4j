@@ -111,4 +111,17 @@ pub extern "C" fn init() {
         .build()
         .unwrap();
     lumis::highlight("", rust_formatter);
+    // TODO: CSV doesn't need preloading?
+    // let csv_formatter = TerminalBuilder::new()
+    //     .lang(Language::CSV)
+    //     .theme(Some(theme.clone()))
+    //     .build()
+    //     .unwrap();
+    // lumis::highlight("", csv_formatter);
+    let java_formatter = TerminalBuilder::new()
+        .lang(Language::Java)
+        .theme(Some(theme.clone()))
+        .build()
+        .unwrap();
+    lumis::highlight("", java_formatter);
 }
