@@ -1,4 +1,4 @@
 target
 .idea
 
-core/src/test/resources/io/roastedroot/lumis4j/core/*.received.txt
+core/src/test/resources/io/roastedroot/lumis4j/core/*.received.*

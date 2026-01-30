@@ -2,7 +2,7 @@ extern crate lumis;
 
 use std::ptr;
 
-use lumis::{languages::Language, themes, TerminalBuilder};
+use lumis::{languages::Language, themes, HtmlInlineBuilder, HtmlLinkedBuilder, TerminalBuilder};
 
 // Import malloc and free from WASI-SDK C library
 extern "C" {
@@ -27,7 +27,9 @@ pub extern "C" fn highlight(
     theme_ptr: i32,
     theme_len: i32,
     lang_ptr: i32,
-    lang_len: i32) -> i64 {
+    lang_len: i32,
+    formatter_type: i32,
+) -> i64 {
     let code = consume_string(code_ptr, code_len);
     let theme_name = consume_string(theme_ptr, theme_len);
     let lang = consume_string(lang_ptr, lang_len);
@@ -35,6 +37,7 @@ pub extern "C" fn highlight(
     // println!("lang: {:?}", lang);
     // println!("theme: {:?}", theme_name);
     // println!("code: {:?}", code);
+    // println!("formatter_type: {:?}", formatter_type);
 
     let theme = match themes::get(&theme_name) {
         Ok(theme) => theme,
@@ -49,31 +52,70 @@ pub extern "C" fn highlight(
 
     // println!("selected language: {:?}", language);
 
-    let formatter = TerminalBuilder::new()
-        .lang(language)
-        .theme(Some(theme))
-        .build()
-        .expect("Failed to build formatter");
+    let formatter = build_formatter(language, theme, formatter_type);
 
     let output = lumis::highlight(&code, formatter);
 
     leak_string(output.to_string())
 }
 
+fn build_formatter(
+    language: Language,
+    theme: themes::Theme,
+    formatter_type: i32,
+) -> Box<dyn lumis::formatter::Formatter> {
+    match formatter_type {
+        1 => {
+            // Terminal formatter
+            Box::new(
+                TerminalBuilder::new()
+                    .lang(language)
+                    .theme(Some(theme))
+                    .build()
+                    .expect("Failed to build terminal formatter"),
+            )
+        }
+        2 => {
+            // HTML inline formatter
+            Box::new(
+                HtmlInlineBuilder::new()
+                    .lang(language)
+                    .theme(Some(theme))
+                    .build()
+                    .expect("Failed to build HTML inline formatter"),
+            )
+        }
+        3 => {
+            // HTML linked formatter (uses CSS classes, doesn't support themes directly)
+            Box::new(
+                HtmlLinkedBuilder::new()
+                    .lang(language)
+                    .build()
+                    .expect("Failed to build HTML linked formatter"),
+            )
+        }
+        _ => {
+            let error_msg = format!("error: invalid formatter type: {}. Valid types are: 0 (Terminal), 1 (HTML inline), 2 (HTML linked)", formatter_type);
+            eprintln!("{}", error_msg);
+            panic!("{}", error_msg);
+        }
+    }
+}
+
 fn leak_string(s: String) -> i64 {
     let bytes = s.as_bytes();
     let len = bytes.len();
-    
+
     unsafe {
         let ptr = wasm_malloc(len);
-        
+
         if ptr.is_null() {
             eprintln!("error: allocation failed");
             panic!("error: allocation failed");
         }
-        
+
         ptr::copy_nonoverlapping(bytes.as_ptr(), ptr, len);
-        
+
         (((ptr as u32 as u64) << 32) | (len as u32 as u64)) as i64
     }
 }
@@ -111,7 +153,7 @@ pub extern "C" fn init() {
         .build()
         .unwrap();
     lumis::highlight("", rust_formatter);
-    // TODO: CSV doesn't need preloading?
+    // TODO: CSV doesn't need preloading? Seems to break followng caching
     // let csv_formatter = TerminalBuilder::new()
     //     .lang(Language::CSV)
     //     .theme(Some(theme.clone()))
@@ -124,4 +166,17 @@ pub extern "C" fn init() {
         .build()
         .unwrap();
     lumis::highlight("", java_formatter);
+    // TODO: not sure how much this is effective
+    let java_html_formatter = HtmlInlineBuilder::new()
+        .lang(Language::Java)
+        .theme(Some(theme.clone()))
+        .build()
+        .unwrap();
+    lumis::highlight("", java_html_formatter);
+    // doesn't seem effective
+    let java_html_linked_formatter = HtmlLinkedBuilder::new()
+        .lang(Language::Java)
+        .build()
+        .unwrap();
+    lumis::highlight("", java_html_linked_formatter);
 }

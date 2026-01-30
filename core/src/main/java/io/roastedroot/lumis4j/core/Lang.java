@@ -86,7 +86,7 @@ public enum Lang {
         this.value = value;
     }
 
-    public String getValue() {
+    public String value() {
         return value;
     }
 
@@ -95,7 +95,7 @@ public enum Lang {
     static {
         langs = new HashMap<>();
         for (Lang lang : Lang.values()) {
-            langs.put(lang.getValue(), lang);
+            langs.put(lang.value(), lang);
         }
         // Add aliases
         langs.put("text", PLAINTEXT);

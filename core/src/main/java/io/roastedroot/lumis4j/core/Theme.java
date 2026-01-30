@@ -128,7 +128,7 @@ public enum Theme {
         this.value = value;
     }
 
-    public String getValue() {
+    public String value() {
         return value;
     }
 
@@ -137,7 +137,7 @@ public enum Theme {
     static {
         themes = new HashMap<>();
         for (Theme theme : Theme.values()) {
-            themes.put(theme.getValue(), theme);
+            themes.put(theme.value(), theme);
         }
     }
 

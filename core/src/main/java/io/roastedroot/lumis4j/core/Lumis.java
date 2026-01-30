@@ -13,18 +13,21 @@ public final class Lumis implements AutoCloseable {
 
     private static final Theme DEFAULT_THEME = Theme.GITHUB_DARK;
     private static final Lang DEFAULT_LANG = Lang.PLAINTEXT;
+    private static final Formatter DEFAULT_FORMATTER = Formatter.TERMINAL;
 
     private final Theme theme;
     private final Lang lang;
+    private final Formatter formatter;
 
     // wasm fields
     private final Instance instance;
     private final WasiPreview1 wasi;
     private final Lumis_ModuleExports exports;
 
-    private Lumis(Theme theme, Lang lang) {
+    private Lumis(Theme theme, Lang lang, Formatter formatter) {
         this.theme = theme;
         this.lang = lang;
+        this.formatter = formatter;
 
         var wasiOpts = WasiOptions.builder().inheritSystem().build();
         this.wasi = WasiPreview1.builder().withOptions(wasiOpts).build();
@@ -44,15 +47,17 @@ public final class Lumis implements AutoCloseable {
     public LumisResult highlight(String code) {
         return highlight(
                 code.getBytes(UTF_8),
-                theme.getValue().getBytes(UTF_8),
-                lang.getValue().getBytes(UTF_8));
+                theme.value().getBytes(UTF_8),
+                lang.value().getBytes(UTF_8),
+                formatter);
     }
 
     public LumisResult highlight(byte[] code) {
-        return highlight(code, theme.getValue().getBytes(UTF_8), lang.getValue().getBytes(UTF_8));
+        return highlight(
+                code, theme.value().getBytes(UTF_8), lang.value().getBytes(UTF_8), formatter);
     }
 
-    public LumisResult highlight(byte[] code, byte[] theme, byte[] lang) {
+    private LumisResult highlight(byte[] code, byte[] theme, byte[] lang, Formatter formatter) {
         try {
             var codePtr = exports.wasmMalloc(code.length);
             exports.memory().write(codePtr, code);
@@ -65,9 +70,13 @@ public final class Lumis implements AutoCloseable {
 
             var resultPtr =
                     exports.highlight(
-                            codePtr, code.length,
-                            themePtr, theme.length,
-                            langPtr, lang.length);
+                            codePtr,
+                            code.length,
+                            themePtr,
+                            theme.length,
+                            langPtr,
+                            lang.length,
+                            formatter.value());
 
             var result = unpackResult(resultPtr);
             return new LumisResult(result);
@@ -94,6 +103,7 @@ public final class Lumis implements AutoCloseable {
     public static final class Builder {
         private Theme theme = DEFAULT_THEME;
         private Lang lang = DEFAULT_LANG;
+        private Formatter formatter = DEFAULT_FORMATTER;
 
         private Builder() {}
 
@@ -115,8 +125,13 @@ public final class Lumis implements AutoCloseable {
             return this;
         }
 
+        public Builder withFormatter(Formatter formatter) {
+            this.formatter = formatter;
+            return this;
+        }
+
         public Lumis build() {
-            return new Lumis(theme, lang);
+            return new Lumis(theme, lang, formatter);
         }
     }
 }

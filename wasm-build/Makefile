@@ -8,6 +8,10 @@ PWD := $(CURDIR)
 clean:
 	rm -rf target wasi-sdk* wizer* binaryen*
 
+.PHONY: fmt
+fmt:
+	cargo fmt
+
 .PHONY: get-wasisdk
 get-wasisdk:
 	wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_SDK_VERSION}/wasi-sdk-${WASI_SDK_VERSION}.0-x86_64-linux.tar.gz
