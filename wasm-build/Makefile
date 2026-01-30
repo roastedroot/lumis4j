@@ -46,5 +46,8 @@ release:
 	rm -f ../lumis.wasm
 	cp target/wasm32-wasip1/release/lumis-opt.wasm ../lumis.wasm
 
+.PHONY: local
+local: build optimize release
+
 .PHONY: all
-all: get-wasisdk get-wizer get-binaryen build optimize release
+all: get-wasisdk get-wizer get-binaryen local

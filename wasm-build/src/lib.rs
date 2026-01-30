@@ -25,9 +25,16 @@ pub extern "C" fn highlight(
     code_ptr: i32,
     code_len: i32,
     theme_ptr: i32,
-    theme_len: i32) -> i64 {
+    theme_len: i32,
+    lang_ptr: i32,
+    lang_len: i32) -> i64 {
     let code = consume_string(code_ptr, code_len);
     let theme_name = consume_string(theme_ptr, theme_len);
+    let lang = consume_string(lang_ptr, lang_len);
+
+    // println!("lang: {:?}", lang);
+    // println!("theme: {:?}", theme_name);
+    // println!("code: {:?}", code);
 
     let theme = match themes::get(&theme_name) {
         Ok(theme) => theme,
@@ -38,10 +45,12 @@ pub extern "C" fn highlight(
         }
     };
 
-    // TODO: make terminal/HTML etc. selectable
+    let language = Language::guess(Some(&lang), "");
+
+    // println!("selected language: {:?}", language);
+
     let formatter = TerminalBuilder::new()
-        // TODO: make language configurable
-        .lang(Language::JavaScript)
+        .lang(language)
         .theme(Some(theme))
         .build()
         .expect("Failed to build formatter");
@@ -88,13 +97,18 @@ fn consume_string(ptr: i32, len: i32) -> String {
 
 #[export_name = "wizer.initialize"]
 pub extern "C" fn init() {
-    // TODO: verify the invariant matrix to be triggered here
-
-    // github_dark | javascript | terminal
-    let formatter = TerminalBuilder::new()
+    // Seems like this will automagically load everything
+    let theme = themes::get("github_dark").unwrap();
+    let js_formatter = TerminalBuilder::new()
         .lang(Language::JavaScript)
-        .theme(Some(themes::get("github_dark").unwrap()))
+        .theme(Some(theme.clone()))
         .build()
         .unwrap();
-    lumis::highlight("", formatter);
+    lumis::highlight("", js_formatter);
+    let rust_formatter = TerminalBuilder::new()
+        .lang(Language::Rust)
+        .theme(Some(theme.clone()))
+        .build()
+        .unwrap();
+    lumis::highlight("", rust_formatter);
 }

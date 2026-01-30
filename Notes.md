@@ -9,4 +9,5 @@ Lumis looks promising
 
 low priority:
 - nice to have: automate Theme enum generation
+- nice to have: automate Lang enum generation
 - stdout/stderr from module can be captured...

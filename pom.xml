@@ -63,6 +63,7 @@
 
     <!-- test time versions -->
     <junit.version>5.14.2</junit.version>
+    <approvaltests.version>26.6.0</approvaltests.version>
 
     <!-- runtime versions -->
     <chicory.version>1.6.1</chicory.version>
