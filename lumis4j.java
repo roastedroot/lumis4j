@@ -2,7 +2,7 @@
 
 // Demo for: https://github.com/roastedroot/lumis4j
 
-//DEPS io.roastedroot:lumis4j:0.0.1
+//DEPS io.roastedroot:lumis4j:LATEST
 //DEPS info.picocli:picocli:4.7.5
 
 import static java.lang.System.*;
