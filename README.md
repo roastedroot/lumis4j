@@ -157,7 +157,7 @@ mvn clean install
 
 ## Acknowledgements
 
-This project is a Java wrapper of [lumis](https://github.com/leandrocp/lumis) by [leandrocp](https://github.com/leandrocp). 
+This project is a Java wrapper of [lumis](https://github.com/leandrocp/lumis) by [leandrocp](https://github.com/leandrocp).
 
 Special thanks to:
 - **[lumis](https://github.com/leandrocp/lumis)** - The original Rust implementation that powers this library

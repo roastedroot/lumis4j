@@ -8,6 +8,7 @@ Lumis looks promising
 - get-binaryen and full toolchain - done
 - The Wizer initialization step looks fragile and is basically "magic"
 - add rendered examples to the readme
+- initialize the other languages or, at least a part of them
 
 low priority:
 - nice to have: automate Theme enum generation

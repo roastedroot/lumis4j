@@ -7,13 +7,14 @@ name = "lumis"
 crate-type = ["cdylib"]
 
 [dependencies]
-# TODO: verify what's the best way to include more languages, separate packages, one big etc. etc.
+# use a minimal build during development
 # lumis = { version = "0.1", default-features = false, features = [
 #     "lang-rust",
 #     "lang-javascript",
 #     "lang-csv",
 #     "lang-java"
 # ] }
+# full build
 lumis = { version = "0.1.1", features = ["all-languages"] }
 
 [profile.release]
