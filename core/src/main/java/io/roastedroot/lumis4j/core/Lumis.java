@@ -1,7 +1,11 @@
 package io.roastedroot.lumis4j.core;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.dylibso.chicory.annotations.WasmModuleInterface;
+import com.dylibso.chicory.runtime.ImportValues;
 import com.dylibso.chicory.runtime.Instance;
+import com.dylibso.chicory.wasi.WasiOptions;
 import com.dylibso.chicory.wasi.WasiPreview1;
 
 @WasmModuleInterface(WasmResource.absoluteFile)
@@ -13,11 +17,19 @@ public final class Lumis implements AutoCloseable {
     // wasm fields
     private final Instance instance;
     private final WasiPreview1 wasi;
+    private final Lumis_ModuleExports exports;
 
     private Lumis(Theme theme) {
         this.theme = theme;
-        this.instance = null;
-        this.wasi = null;
+        var wasiOpts = WasiOptions.builder().inheritSystem().build();
+        this.wasi = WasiPreview1.builder().withOptions(wasiOpts).build();
+        var imports = ImportValues.builder().addFunction(wasi.toHostFunctions()).build();
+        this.instance =
+                Instance.builder(LumisModule.load())
+                        .withImportValues(imports)
+                        .withMachineFactory(LumisModule::create)
+                        .build();
+        this.exports = new Lumis_ModuleExports(this.instance);
     }
 
     public static Builder builder() {
@@ -25,7 +37,39 @@ public final class Lumis implements AutoCloseable {
     }
 
     public LumisResult highlight(String code) {
-        return new LumisResult(true, new byte[] {}, new byte[] {}, new byte[] {});
+        return highlight(code.getBytes(UTF_8), theme.getValue().getBytes(UTF_8));
+    }
+
+    public LumisResult highlight(byte[] code) {
+        return highlight(code, theme.getValue().getBytes(UTF_8));
+    }
+
+    public LumisResult highlight(byte[] code, byte[] theme) {
+        try {
+            var codePtr = exports.wasmMalloc(code.length);
+            exports.memory().write(codePtr, code);
+
+            var themePtr = exports.wasmMalloc(theme.length);
+            exports.memory().write(themePtr, theme);
+
+            var resultPtr =
+                    exports.highlight(
+                            codePtr, code.length,
+                            themePtr, theme.length);
+
+            var result = unpackResult(resultPtr);
+            return new LumisResult(result);
+        } catch (RuntimeException e) {
+            return new LumisResult(e);
+        }
+    }
+
+    private byte[] unpackResult(long packed) {
+        var addr = (int) ((packed >>> 32) & 0xFFFFFFFFL);
+        var len = (int) (packed & 0xFFFFFFFFL);
+        var result = instance.memory().readBytes(addr, len);
+        exports.wasmFree(addr);
+        return result;
     }
 
     @Override

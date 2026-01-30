@@ -4,28 +4,27 @@ import java.nio.charset.StandardCharsets;
 
 public final class LumisResult {
     private final boolean success;
-    private final byte[] stdout;
-    private final byte[] stderr;
-
     private final byte[] result;
+    private final Throwable error;
 
-    LumisResult(boolean success, byte[] stdout, byte[] stderr, byte[] result) {
-        this.success = success;
-        this.stdout = stdout;
-        this.stderr = stderr;
+    LumisResult(byte[] result) {
+        this.success = true;
         this.result = result;
+        this.error = null;
     }
 
-    public byte[] stdout() {
-        return stdout;
+    LumisResult(Throwable error) {
+        this.success = false;
+        this.result = null;
+        this.error = error;
     }
 
-    public byte[] stderr() {
-        return stderr;
-    }
-
-    public byte[] result() {
+    public byte[] bytes() {
         return result;
+    }
+
+    public String string() {
+        return new String(result, StandardCharsets.UTF_8);
     }
 
     public boolean success() {
@@ -34,13 +33,5 @@ public final class LumisResult {
 
     public boolean failure() {
         return !success;
-    }
-
-    public void printStdout() {
-        System.out.println(new String(stdout, StandardCharsets.UTF_8));
-    }
-
-    public void printStderr() {
-        System.err.println(new String(stderr, StandardCharsets.UTF_8));
     }
 }
