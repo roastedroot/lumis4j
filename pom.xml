@@ -4,7 +4,7 @@
 
   <groupId>io.roastedroot</groupId>
   <artifactId>lumis4j-parent</artifactId>
-  <version>0.0.1</version>
+  <version>999-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>lumis4j-parent</name>
@@ -47,7 +47,7 @@
     <maven.compiler.release>11</maven.compiler.release>
     <maven.compiler.failOnWarning>true</maven.compiler.failOnWarning>
     <maven.dependency.failOnWarning>true</maven.dependency.failOnWarning>
-    <project.build.outputTimestamp>2026-01-30T18:37:52Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2026-01-30T18:54:10Z</project.build.outputTimestamp>
 
     <!-- build tool versions -->
     <checkstyle.version>13.0.0</checkstyle.version>
