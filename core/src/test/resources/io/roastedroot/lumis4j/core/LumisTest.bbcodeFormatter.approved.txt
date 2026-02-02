@@ -1,4 +1,3 @@
-[code]
-[color=keyword-function]fn[/color][color=function]hello[/color][color=punctuation-bracket]([/color][color=variable-parameter]name[/color][color=punctuation-delimiter]:[/color][color=operator]&amp;[/color][color=type-builtin]str[/color][color=punctuation-bracket])[/color][color=punctuation-bracket]&lbrace;[/color]
-[color=keyword-exception]println[/color][color=function-macro]![/color][color=punctuation-bracket]([/color][color=string]&quot;Hello, &lbrace;name&rbrace;!&quot;[/color][color=punctuation-bracket])[/color][color=punctuation-delimiter];[/color]
-[color=punctuation-bracket]&rbrace;[/color][/code]
+[keyword-function]fn[/keyword-function] [function]hello[/function][punctuation-bracket]([/punctuation-bracket][variable-parameter]name[/variable-parameter][punctuation-delimiter]:[/punctuation-delimiter] [operator]&[/operator][type-builtin]str[/type-builtin][punctuation-bracket])[/punctuation-bracket] [punctuation-bracket]{[/punctuation-bracket]
+    [keyword-exception]println[/keyword-exception][function-macro]![/function-macro][punctuation-bracket]([/punctuation-bracket][string]"Hello, {name}!"[/string][punctuation-bracket])[/punctuation-bracket][punctuation-delimiter];[/punctuation-delimiter]
+[punctuation-bracket]}[/punctuation-bracket]

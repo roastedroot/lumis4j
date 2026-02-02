@@ -29,7 +29,7 @@ public class LumisTest {
         var result = lumis.highlight(code);
         var duration = (System.nanoTime() - before) / 1_000_000;
 
-        System.out.println("elapsed: " + duration);
+        // System.out.println("elapsed: " + duration);
         assertTrue(duration < MAX_EXEC_TIME_MS, "Highlighting took " + duration + " ms");
         return result;
     }
@@ -156,24 +156,24 @@ public class LumisTest {
         Approvals.verify(result.string(), html());
     }
 
-    //    @Test
-    //    public void bbcodeFormatter() throws Exception {
-    //        // Arrange
-    //        var lumis =
-    //                Lumis.builder()
-    //                        .withLang(Lang.RUST)
-    //                        .withTheme(Theme.CATPPUCCIN_FRAPPE)
-    //                        .withFormatter(Formatter.BBCODE)
-    //                        .build();
-    //        var code = readCode("rust");
-    //
-    //        // Act
-    //        var result = highlight(lumis, code);
-    //
-    //        // Assert
-    //        assertTrue(result.success());
-    //        Approvals.verify(result.string());
-    //    }
+    @Test
+    public void bbcodeFormatter() throws Exception {
+        // Arrange
+        var lumis =
+                Lumis.builder()
+                        .withLang(Lang.RUST)
+                        .withTheme(Theme.CATPPUCCIN_FRAPPE)
+                        .withFormatter(Formatter.BBCODE)
+                        .build();
+        var code = readCode("rust");
+
+        // Act
+        var result = highlight(lumis, code);
+
+        // Assert
+        assertTrue(result.success());
+        Approvals.verify(result.string());
+    }
 
     @Test
     public void verifyKotlinLanguage() throws Exception {

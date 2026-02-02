@@ -1,10 +1,13 @@
 extern crate lumis;
 extern crate strum;
 
+mod bbcode;
+
 use std::ptr;
 
 use lumis::{languages::Language, themes, HtmlInlineBuilder, HtmlLinkedBuilder, TerminalBuilder};
 use strum::IntoEnumIterator;
+use bbcode::BBCode;
 
 // Import malloc and free from WASI-SDK C library
 extern "C" {
@@ -96,8 +99,12 @@ fn build_formatter(
                     .expect("Failed to build HTML linked formatter"),
             )
         }
+        4 => {
+            // BBCode formatter
+            Box::new(BBCode::new(language, Some(theme)))
+        }
         _ => {
-            let error_msg = format!("error: invalid formatter type: {}. Valid types are: 0 (Terminal), 1 (HTML inline), 2 (HTML linked)", formatter_type);
+            let error_msg = format!("error: invalid formatter type: {}. Valid types are: 1 (Terminal), 2 (HTML inline), 3 (HTML linked), 4 (BBCode)", formatter_type);
             eprintln!("{}", error_msg);
             panic!("{}", error_msg);
         }
@@ -169,5 +176,9 @@ pub extern "C" fn init() {
         {
             lumis::highlight("", formatter);
         }
+        
+        // BBCode formatter
+        let bbcode_formatter = BBCode::new(language, Some(theme.clone()));
+        lumis::highlight("", bbcode_formatter);
     }
 }
