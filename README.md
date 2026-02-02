@@ -22,6 +22,19 @@
 
 ## Quick Start
 
+### JBang 
+
+Install as tool:
+`jbang app install lumis4j@roastedroot/lumis4j`
+
+`lumis4j --help`
+
+`lumis4j --theme dracula *.java`
+
+Dependency:
+
+`//DEPS io.roastedroot:lumis4j:LATEST`
+
 ### Maven
 
 ```xml
