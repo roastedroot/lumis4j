@@ -1,8 +1,10 @@
 extern crate lumis;
+extern crate strum;
 
 use std::ptr;
 
 use lumis::{languages::Language, themes, HtmlInlineBuilder, HtmlLinkedBuilder, TerminalBuilder};
+use strum::IntoEnumIterator;
 
 // Import malloc and free from WASI-SDK C library
 extern "C" {
@@ -136,47 +138,36 @@ fn consume_string(ptr: i32, len: i32) -> String {
 }
 
 // Wizer configuration
-
 #[export_name = "wizer.initialize"]
 pub extern "C" fn init() {
-    // Seems like this will automagically load everything
+    // Preload all languages and formatters to ensure they're initialized
     let theme = themes::get("github_dark").unwrap();
-    let js_formatter = TerminalBuilder::new()
-        .lang(Language::JavaScript)
-        .theme(Some(theme.clone()))
-        .build()
-        .unwrap();
-    lumis::highlight("", js_formatter);
-    let rust_formatter = TerminalBuilder::new()
-        .lang(Language::Rust)
-        .theme(Some(theme.clone()))
-        .build()
-        .unwrap();
-    lumis::highlight("", rust_formatter);
-    // TODO: CSV doesn't need preloading? Seems to break followng caching
-    // let csv_formatter = TerminalBuilder::new()
-    //     .lang(Language::CSV)
-    //     .theme(Some(theme.clone()))
-    //     .build()
-    //     .unwrap();
-    // lumis::highlight("", csv_formatter);
-    let java_formatter = TerminalBuilder::new()
-        .lang(Language::Java)
-        .theme(Some(theme.clone()))
-        .build()
-        .unwrap();
-    lumis::highlight("", java_formatter);
-    // TODO: not sure how much this is effective
-    let java_html_formatter = HtmlInlineBuilder::new()
-        .lang(Language::Java)
-        .theme(Some(theme.clone()))
-        .build()
-        .unwrap();
-    lumis::highlight("", java_html_formatter);
-    // doesn't seem effective
-    let java_html_linked_formatter = HtmlLinkedBuilder::new()
-        .lang(Language::Java)
-        .build()
-        .unwrap();
-    lumis::highlight("", java_html_linked_formatter);
+
+    for language in Language::iter() {
+        // Terminal formatter
+        if let Ok(formatter) = TerminalBuilder::new()
+            .lang(language)
+            .theme(Some(theme.clone()))
+            .build()
+        {
+            lumis::highlight("", formatter);
+        }
+        
+        // HTML inline formatter
+        if let Ok(formatter) = HtmlInlineBuilder::new()
+            .lang(language)
+            .theme(Some(theme.clone()))
+            .build()
+        {
+            lumis::highlight("", formatter);
+        }
+        
+        // HTML linked formatter (doesn't support themes directly)
+        if let Ok(formatter) = HtmlLinkedBuilder::new()
+            .lang(language)
+            .build()
+        {
+            lumis::highlight("", formatter);
+        }
+    }
 }
