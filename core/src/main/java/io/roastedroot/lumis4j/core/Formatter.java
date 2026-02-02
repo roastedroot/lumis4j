@@ -5,7 +5,8 @@ public enum Formatter {
     TERMINAL(1),
     HTML_INLINE(2),
     // Linked doesn't support "themes"
-    HTML_LINKED(3);
+    HTML_LINKED(3),
+    BBCODE(4);
 
     private final int value;
 

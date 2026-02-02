@@ -22,7 +22,7 @@
 
 ## Quick Start
 
-### JBang 
+### JBang
 
 Install as tool:
 `jbang app install lumis4j@roastedroot/lumis4j`

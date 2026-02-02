@@ -154,7 +154,8 @@ public class lumis4j implements Callable<Integer> {
             case "terminal" -> Formatter.TERMINAL;
             case "html-inline" -> Formatter.HTML_INLINE;
             case "html-linked" -> Formatter.HTML_LINKED;
-            default -> throw new IllegalArgumentException("Unknown format: " + name + " (use terminal, html-inline, or html-linked)");
+            case "bbcode" -> Formatter.BBCODE;
+            default -> throw new IllegalArgumentException("Unknown format: " + name + " (use terminal, html-inline, html-linked, or bbcode)");
         };
     }
 

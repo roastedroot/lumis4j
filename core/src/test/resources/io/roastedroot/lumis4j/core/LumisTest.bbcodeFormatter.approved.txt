@@ -1,0 +1,4 @@
+[code]
+[color=keyword-function]fn[/color][color=function]hello[/color][color=punctuation-bracket]([/color][color=variable-parameter]name[/color][color=punctuation-delimiter]:[/color][color=operator]&amp;[/color][color=type-builtin]str[/color][color=punctuation-bracket])[/color][color=punctuation-bracket]&lbrace;[/color]
+[color=keyword-exception]println[/color][color=function-macro]![/color][color=punctuation-bracket]([/color][color=string]&quot;Hello, &lbrace;name&rbrace;!&quot;[/color][color=punctuation-bracket])[/color][color=punctuation-delimiter];[/color]
+[color=punctuation-bracket]&rbrace;[/color][/code]

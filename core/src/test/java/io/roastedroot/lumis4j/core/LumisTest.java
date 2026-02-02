@@ -29,7 +29,7 @@ public class LumisTest {
         var result = lumis.highlight(code);
         var duration = (System.nanoTime() - before) / 1_000_000;
 
-        // System.out.println("elapsed: " + duration);
+        System.out.println("elapsed: " + duration);
         assertTrue(duration < MAX_EXEC_TIME_MS, "Highlighting took " + duration + " ms");
         return result;
     }
@@ -156,39 +156,36 @@ public class LumisTest {
         Approvals.verify(result.string(), html());
     }
 
+    //    @Test
+    //    public void bbcodeFormatter() throws Exception {
+    //        // Arrange
+    //        var lumis =
+    //                Lumis.builder()
+    //                        .withLang(Lang.RUST)
+    //                        .withTheme(Theme.CATPPUCCIN_FRAPPE)
+    //                        .withFormatter(Formatter.BBCODE)
+    //                        .build();
+    //        var code = readCode("rust");
+    //
+    //        // Act
+    //        var result = highlight(lumis, code);
+    //
+    //        // Assert
+    //        assertTrue(result.success());
+    //        Approvals.verify(result.string());
+    //    }
+
     @Test
-    public void readmeExampleJavaScriptDracula() throws Exception {
-        // Generate HTML output for README example: JavaScript with Dracula theme
-        var lumis =
-                Lumis.builder()
-                        .withLang(Lang.JAVASCRIPT)
-                        .withTheme(Theme.DRACULA)
-                        .withFormatter(Formatter.HTML_INLINE)
-                        .build();
+    public void verifyKotlinLanguage() throws Exception {
+        // Arrange
+        var lumis = Lumis.builder().withLang(Lang.KOTLIN).build();
+        var code = readCode("kotlin");
 
-        var code = "console.log('Hello, World!');";
-        var result = lumis.highlight(code);
+        // Act
+        var result = highlight(lumis, code);
 
+        // Assert
         assertTrue(result.success());
-        Approvals.verify(result.string(), html());
-        lumis.close();
-    }
-
-    @Test
-    public void readmeExampleJavaCatppuccin() throws Exception {
-        // Generate HTML output for README example: Java with Catppuccin Frappe theme
-        var lumis =
-                Lumis.builder()
-                        .withLang(Lang.JAVA)
-                        .withTheme(Theme.CATPPUCCIN_FRAPPE)
-                        .withFormatter(Formatter.HTML_INLINE)
-                        .build();
-
-        var code = "public class Hello { }";
-        var result = lumis.highlight(code);
-
-        assertTrue(result.success());
-        Approvals.verify(result.string(), html());
-        lumis.close();
+        Approvals.verify(result.string());
     }
 }

@@ -8,14 +8,14 @@ crate-type = ["cdylib"]
 
 [dependencies]
 # use a minimal build during development
-lumis = { version = "0.1", default-features = false, features = [
-    "lang-rust",
-    "lang-javascript",
-    "lang-csv",
-    "lang-java"
-] }
+# lumis = { version = "0.1", default-features = false, features = [
+#     "lang-rust",
+#     "lang-javascript",
+#     "lang-csv",
+#     "lang-java"
+# ] }
 # full build
-# lumis = { version = "0.1.1", features = ["all-languages"] }
+lumis = { version = "0.1.1", features = ["all-languages"] }
 strum = { version = "0.27", features = ["derive"] }
 
 [profile.release]
