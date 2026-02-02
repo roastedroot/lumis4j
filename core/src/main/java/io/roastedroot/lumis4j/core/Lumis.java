@@ -52,6 +52,14 @@ public final class Lumis implements AutoCloseable {
                 formatter);
     }
 
+    public LumisResult highlight(String code, Theme theme, Lang lang, Formatter formatter) {
+        return highlight(
+                code.getBytes(UTF_8),
+                theme.value().getBytes(UTF_8),
+                lang.value().getBytes(UTF_8),
+                formatter);
+    }
+
     public LumisResult highlight(byte[] code) {
         return highlight(
                 code, theme.value().getBytes(UTF_8), lang.value().getBytes(UTF_8), formatter);
