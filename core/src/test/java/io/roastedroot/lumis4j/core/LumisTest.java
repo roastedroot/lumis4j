@@ -24,9 +24,9 @@ public class LumisTest {
     // without cache highlight takes seconds on the first iteration
     private long MAX_EXEC_TIME_MS = 500;
 
-    private LumisResult highlight(Lumis lumis, byte[] code) {
+    private LumisResult highlight(Highlighter highlighter, byte[] code) {
         var before = System.nanoTime();
-        var result = lumis.highlight(code);
+        var result = highlighter.highlight(code);
         var duration = (System.nanoTime() - before) / 1_000_000;
 
         // System.out.println("elapsed: " + duration);
@@ -37,7 +37,7 @@ public class LumisTest {
     @Test
     public void basicUsage() throws Exception {
         // Arrange
-        var lumis = Lumis.builder().withLang(Lang.JAVASCRIPT).build();
+        var lumis = Lumis.builder().build().highlighter().withLang(Lang.JAVASCRIPT).build();
         var code = readCode("js");
 
         // Act
@@ -51,7 +51,13 @@ public class LumisTest {
     @Test
     public void changeTheme() throws Exception {
         // Arrange
-        var lumis = Lumis.builder().withLang(Lang.JAVASCRIPT).withTheme(Theme.BAMBOO_LIGHT).build();
+        var lumis =
+                Lumis.builder()
+                        .build()
+                        .highlighter()
+                        .withLang(Lang.JAVASCRIPT)
+                        .withTheme(Theme.BAMBOO_LIGHT)
+                        .build();
         var code = readCode("bamboo");
 
         // Act
@@ -65,7 +71,13 @@ public class LumisTest {
     @Test
     public void changeLang() throws Exception {
         // Arrange
-        var lumis = Lumis.builder().withLang(Lang.RUST).withTheme(Theme.AYU_MIRAGE).build();
+        var lumis =
+                Lumis.builder()
+                        .build()
+                        .highlighter()
+                        .withLang(Lang.RUST)
+                        .withTheme(Theme.AYU_MIRAGE)
+                        .build();
         var code = readCode("rust");
 
         // Act
@@ -79,7 +91,7 @@ public class LumisTest {
     @Test
     public void allDefaults() throws Exception {
         // Arrange
-        var lumis = Lumis.builder().build();
+        var lumis = Lumis.builder().build().highlighter().build();
         var code = readCode("default");
 
         // Act
@@ -93,7 +105,7 @@ public class LumisTest {
     @Test
     public void csv() throws Exception {
         // Arrange
-        var lumis = Lumis.builder().withLang("csv").build();
+        var lumis = Lumis.builder().build().highlighter().withLang("csv").build();
         var code = readCode("csv");
 
         // Act
@@ -107,7 +119,13 @@ public class LumisTest {
     @Test
     public void java() throws Exception {
         // Arrange
-        var lumis = Lumis.builder().withLang(Lang.JAVA).withTheme(Theme.AURA_SOFT_DARK).build();
+        var lumis =
+                Lumis.builder()
+                        .build()
+                        .highlighter()
+                        .withLang(Lang.JAVA)
+                        .withTheme(Theme.AURA_SOFT_DARK)
+                        .build();
         var code = readCode("java");
 
         // Act
@@ -123,6 +141,8 @@ public class LumisTest {
         // Arrange
         var lumis =
                 Lumis.builder()
+                        .build()
+                        .highlighter()
                         .withLang(Lang.JAVA)
                         .withTheme(Theme.CATPPUCCIN_FRAPPE)
                         .withFormatter(Formatter.HTML_INLINE)
@@ -142,6 +162,8 @@ public class LumisTest {
         // Arrange
         var lumis =
                 Lumis.builder()
+                        .build()
+                        .highlighter()
                         .withLang(Lang.RUST)
                         .withTheme(Theme.CATPPUCCIN_FRAPPE)
                         .withFormatter(Formatter.HTML_LINKED)
@@ -161,6 +183,8 @@ public class LumisTest {
         // Arrange
         var lumis =
                 Lumis.builder()
+                        .build()
+                        .highlighter()
                         .withLang(Lang.RUST)
                         .withTheme(Theme.CATPPUCCIN_FRAPPE)
                         .withFormatter(Formatter.BBCODE)
@@ -178,7 +202,7 @@ public class LumisTest {
     @Test
     public void verifyKotlinLanguage() throws Exception {
         // Arrange
-        var lumis = Lumis.builder().withLang(Lang.KOTLIN).build();
+        var lumis = Lumis.builder().build().highlighter().withLang(Lang.KOTLIN).build();
         var code = readCode("kotlin");
 
         // Act
