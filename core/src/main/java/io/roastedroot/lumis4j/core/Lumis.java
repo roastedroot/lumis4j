@@ -1,7 +1,5 @@
 package io.roastedroot.lumis4j.core;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.dylibso.chicory.annotations.WasmModuleInterface;
 import com.dylibso.chicory.runtime.ImportValues;
 import com.dylibso.chicory.runtime.Instance;
@@ -10,25 +8,11 @@ import com.dylibso.chicory.wasi.WasiPreview1;
 
 @WasmModuleInterface(WasmResource.absoluteFile)
 public final class Lumis implements AutoCloseable {
-
-    private static final Theme DEFAULT_THEME = Theme.GITHUB_DARK;
-    private static final Lang DEFAULT_LANG = Lang.PLAINTEXT;
-    private static final Formatter DEFAULT_FORMATTER = Formatter.TERMINAL;
-
-    private final Theme theme;
-    private final Lang lang;
-    private final Formatter formatter;
-
-    // wasm fields
     private final Instance instance;
     private final WasiPreview1 wasi;
     private final Lumis_ModuleExports exports;
 
-    private Lumis(Theme theme, Lang lang, Formatter formatter) {
-        this.theme = theme;
-        this.lang = lang;
-        this.formatter = formatter;
-
+    private Lumis() {
         var wasiOpts = WasiOptions.builder().inheritSystem().build();
         this.wasi = WasiPreview1.builder().withOptions(wasiOpts).build();
         var imports = ImportValues.builder().addFunction(wasi.toHostFunctions()).build();
@@ -44,28 +28,11 @@ public final class Lumis implements AutoCloseable {
         return new Builder();
     }
 
-    public LumisResult highlight(String code) {
-        return highlight(
-                code.getBytes(UTF_8),
-                theme.value().getBytes(UTF_8),
-                lang.value().getBytes(UTF_8),
-                formatter);
+    public Highlighter.Builder highlighter() {
+        return new Highlighter.Builder(this);
     }
 
-    public LumisResult highlight(String code, Theme theme, Lang lang, Formatter formatter) {
-        return highlight(
-                code.getBytes(UTF_8),
-                theme.value().getBytes(UTF_8),
-                lang.value().getBytes(UTF_8),
-                formatter);
-    }
-
-    public LumisResult highlight(byte[] code) {
-        return highlight(
-                code, theme.value().getBytes(UTF_8), lang.value().getBytes(UTF_8), formatter);
-    }
-
-    private LumisResult highlight(byte[] code, byte[] theme, byte[] lang, Formatter formatter) {
+    LumisResult highlight(byte[] code, byte[] theme, byte[] lang, int formatter) {
         try {
             var codePtr = exports.wasmMalloc(code.length);
             exports.memory().write(codePtr, code);
@@ -84,7 +51,7 @@ public final class Lumis implements AutoCloseable {
                             theme.length,
                             langPtr,
                             lang.length,
-                            formatter.value());
+                            formatter);
 
             var result = unpackResult(resultPtr);
             return new LumisResult(result);
@@ -109,37 +76,10 @@ public final class Lumis implements AutoCloseable {
     }
 
     public static final class Builder {
-        private Theme theme = DEFAULT_THEME;
-        private Lang lang = DEFAULT_LANG;
-        private Formatter formatter = DEFAULT_FORMATTER;
-
         private Builder() {}
 
-        public Builder withTheme(String theme) {
-            return withTheme(Theme.fromString(theme));
-        }
-
-        public Builder withTheme(Theme theme) {
-            this.theme = theme;
-            return this;
-        }
-
-        public Builder withLang(String lang) {
-            return withLang(Lang.fromString(lang));
-        }
-
-        public Builder withLang(Lang lang) {
-            this.lang = lang;
-            return this;
-        }
-
-        public Builder withFormatter(Formatter formatter) {
-            this.formatter = formatter;
-            return this;
-        }
-
         public Lumis build() {
-            return new Lumis(theme, lang, formatter);
+            return new Lumis();
         }
     }
 }
