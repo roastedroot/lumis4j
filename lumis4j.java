@@ -190,12 +190,12 @@ public class lumis4j implements Callable<Integer> {
                 source = Files.readString(file);
                 label = file.toString();
             }
-            try (var lumis = Lumis.builder()
+            try (var lumis = Lumis.builder().build()) {
+            var result = lumis.highlighter()
                     .withLang(lang)
                     .withTheme(theme)
                     .withFormatter(formatter)
-                    .build()) {
-                var result = lumis.highlight(source);
+                    .build().highlight(source);
                 out.println("--- " + label + " (" + lang.value() + ") ---");
                 out.println(result.string());
             }
