@@ -1,5 +1,6 @@
 package io.roastedroot.lumis4j.core;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.approvaltests.Approvals;
@@ -165,7 +166,6 @@ public class LumisTest {
                         .build()
                         .highlighter()
                         .withLang(Lang.RUST)
-                        .withTheme(Theme.CATPPUCCIN_FRAPPE)
                         .withFormatter(Formatter.HTML_LINKED)
                         .build();
         var code = readCode("rust");
@@ -186,7 +186,6 @@ public class LumisTest {
                         .build()
                         .highlighter()
                         .withLang(Lang.RUST)
-                        .withTheme(Theme.CATPPUCCIN_FRAPPE)
                         .withFormatter(Formatter.BBCODE)
                         .build();
         var code = readCode("rust");
@@ -204,6 +203,40 @@ public class LumisTest {
         // Arrange
         var lumis = Lumis.builder().build().highlighter().withLang(Lang.KOTLIN).build();
         var code = readCode("kotlin");
+
+        // Act
+        var result = highlight(lumis, code);
+
+        // Assert
+        assertTrue(result.success());
+        Approvals.verify(result.string());
+    }
+
+    @Test
+    public void bbcodeFormatterRejectsTheme() {
+        // Wrong condition: BBCODE with theme should throw
+        var builder =
+                Lumis.builder()
+                        .build()
+                        .highlighter()
+                        .withLang(Lang.RUST)
+                        .withTheme(Theme.CATPPUCCIN_FRAPPE)
+                        .withFormatter(Formatter.BBCODE);
+
+        assertThrows(IllegalArgumentException.class, builder::build);
+    }
+
+    @Test
+    public void bbcodeFormatterWithoutTheme() throws Exception {
+        // Right condition: BBCODE without theme should work
+        var lumis =
+                Lumis.builder()
+                        .build()
+                        .highlighter()
+                        .withLang(Lang.RUST)
+                        .withFormatter(Formatter.BBCODE)
+                        .build();
+        var code = readCode("rust");
 
         // Act
         var result = highlight(lumis, code);
