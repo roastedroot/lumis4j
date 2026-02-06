@@ -1,0 +1,3 @@
+[keyword-function]fn[/keyword-function] [function]hello[/function][punctuation-bracket]([/punctuation-bracket][variable-parameter]name[/variable-parameter][punctuation-delimiter]:[/punctuation-delimiter] [operator]&[/operator][type-builtin]str[/type-builtin][punctuation-bracket])[/punctuation-bracket] [punctuation-bracket]{[/punctuation-bracket]
+    [keyword-exception]println[/keyword-exception][function-macro]![/function-macro][punctuation-bracket]([/punctuation-bracket][string]"Hello, {name}!"[/string][punctuation-bracket])[/punctuation-bracket][punctuation-delimiter];[/punctuation-delimiter]
+[punctuation-bracket]}[/punctuation-bracket]

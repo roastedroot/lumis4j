@@ -71,13 +71,15 @@ public final class Highlighter {
             if (formatter == null) {
                 formatter = DEFAULT_FORMATTER;
             }
-            if (theme == null) {
+            if (theme != null) {
                 switch (formatter) {
                     case HTML_LINKED:
                     case BBCODE:
                         throw new IllegalArgumentException(
                                 "Theme is not supported by the selected formatter");
                 }
+            }
+            if (theme == null) {
                 theme = DEFAULT_THEME;
             }
             if (lang == null) {
