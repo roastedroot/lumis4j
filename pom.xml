@@ -62,7 +62,7 @@
     <maven-failsafe-plugin.version>3.5.4</maven-failsafe-plugin.version>
 
     <!-- test time versions -->
-    <junit.version>5.14.2</junit.version>
+    <junit.version>5.14.3</junit.version>
     <approvaltests.version>27.0.0</approvaltests.version>
 
     <!-- runtime versions -->
