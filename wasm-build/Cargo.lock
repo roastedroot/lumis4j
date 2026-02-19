@@ -355,15 +355,15 @@ checksum = "df1d3c3b53da64cf5760482273a98e575c651a67eec7f77df96b5b642de8f039"
 name = "lumis"
 version = "0.1.0"
 dependencies = [
- "lumis 0.1.1",
+ "lumis 0.1.2",
  "strum",
 ]
 
 [[package]]
 name = "lumis"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a468912758e17962f422db582fee1bb048f7fd519341750ccdfa4c4d582ad1d1"
+checksum = "0fcf928888802a0d87772599735c4d7e9be49bbce081914d40a72e73bfc52fc2"
 dependencies = [
  "anyhow",
  "cc",
@@ -952,9 +952,9 @@ dependencies = [
 
 [[package]]
 name = "tree-sitter-language"
-version = "0.1.6"
+version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4ae62f7eae5eb549c71b76658648b72cc6111f2d87d24a1e31fa907f4943e3ce"
+checksum = "009994f150cc0cd50ff54917d5bc8bffe8cad10ca10d81c34da2ec421ae61782"
 
 [[package]]
 name = "tree-sitter-lua"
