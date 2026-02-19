@@ -74,30 +74,31 @@
               <wasmFile>../lumis.wasm</wasmFile>
               <!-- <interpreterFallback>WARN</interpreterFallback> -->
               <interpretedFunctions>
-                <function>623</function>
-                <function>625</function>
-                <function>631</function>
-                <function>654</function>
-                <function>665</function>
-                <function>678</function>
-                <function>686</function>
-                <function>691</function>
-                <function>701</function>
-                <function>830</function>
-                <function>874</function>
-                <function>909</function>
-                <function>928</function>
-                <function>942</function>
-                <function>950</function>
-                <function>951</function>
-                <function>1061</function>
-                <function>1064</function>
-                <function>1085</function>
-                <function>1093</function>
-                <function>1097</function>
+                <function>624</function>
+                <function>626</function>
+                <function>632</function>
+                <function>655</function>
+                <function>666</function>
+                <function>679</function>
+                <function>687</function>
+                <function>695</function>
+                <function>700</function>
+                <function>710</function>
+                <function>839</function>
+                <function>881</function>
+                <function>916</function>
+                <function>935</function>
+                <function>949</function>
+                <function>957</function>
+                <function>958</function>
+                <function>1068</function>
+                <function>1071</function>
+                <function>1092</function>
+                <function>1100</function>
                 <function>1104</function>
-                <function>1129</function>
-                <function>907</function>
+                <function>1111</function>
+                <function>1136</function>
+                <function>914</function>
               </interpretedFunctions>
             </configuration>
           </execution>
