@@ -39,6 +39,8 @@ jobs:
     - name: Build WASM
       run: make all
       working-directory: wasm-build
+      env:
+        CARGO_BUILD_JOBS: "1"
 
     - name: Upload WASM artifact
       uses: actions/upload-artifact@v4

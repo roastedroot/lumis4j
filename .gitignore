@@ -1,5 +1,8 @@
 target
 .idea
 *.wasm
+wasm-build/wasi-sdk
+wasm-build/wizer
+wasm-build/binaryen
 
 core/src/test/resources/io/roastedroot/lumis4j/core/*.received.*
