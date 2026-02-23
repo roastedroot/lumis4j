@@ -17,40 +17,7 @@ permissions:
   checks: write
 
 jobs:
-  build-wasm:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v6
-
-    - name: Setup Rust
-      uses: dtolnay/rust-toolchain@stable
-      with:
-        targets: wasm32-wasip1
-
-    - name: Cache wasm-build tools
-      uses: actions/cache@v4
-      with:
-        path: |
-          wasm-build/wasi-sdk
-          wasm-build/wizer
-          wasm-build/binaryen
-        key: wasm-tools-wasisdk29-wizer10.0.0-binaryen125
-
-    - name: Build WASM
-      run: make all
-      working-directory: wasm-build
-      env:
-        CARGO_BUILD_JOBS: "1"
-
-    - name: Upload WASM artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: lumis-wasm
-        path: lumis.wasm
-        retention-days: 1
-
   build:
-    needs: build-wasm
     runs-on: ${{ matrix.os }}
     continue-on-error: true
     strategy:
@@ -62,10 +29,10 @@ jobs:
     steps:
     - uses: actions/checkout@v6
 
-    - name: Download WASM artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: lumis-wasm
+    - name: Download WASM
+      run: gh release download wasm --pattern lumis.wasm
+      env:
+        GH_TOKEN: ${{ github.token }}
 
     - name: Set up Java
       uses: actions/setup-java@v5

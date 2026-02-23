@@ -23,25 +23,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: wasm32-wasip1
-
-      - name: Cache wasm-build tools
-        uses: actions/cache@v4
-        with:
-          path: |
-            wasm-build/wasi-sdk
-            wasm-build/wizer
-            wasm-build/binaryen
-          key: wasm-tools-wasisdk29-wizer10.0.0-binaryen125
-
-      - name: Build WASM
-        run: make all
-        working-directory: wasm-build
+      - name: Download WASM
+        run: gh release download wasm --pattern lumis.wasm
         env:
-          CARGO_BUILD_JOBS: "1"
+          GH_TOKEN: ${{ github.token }}
 
       - name: Setup Java
         uses: actions/setup-java@v5
