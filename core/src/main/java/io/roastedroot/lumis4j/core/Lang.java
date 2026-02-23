@@ -75,6 +75,7 @@ public enum Lang {
     TYPST("typst"),
     VIM("vim"),
     VUE("vue"),
+    WAT("wat"),
     XML("xml"),
     YAML("yaml"),
     ZIG("zig");

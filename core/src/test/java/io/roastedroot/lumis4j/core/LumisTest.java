@@ -213,6 +213,20 @@ public class LumisTest {
     }
 
     @Test
+    public void wat() throws Exception {
+        // Arrange
+        var lumis = Lumis.builder().build().highlighter().withLang(Lang.WAT).build();
+        var code = readCode("wat");
+
+        // Act
+        var result = highlight(lumis, code);
+
+        // Assert
+        assertTrue(result.success());
+        Approvals.verify(result.string());
+    }
+
+    @Test
     public void bbcodeFormatterRejectsTheme() {
         // Wrong condition: BBCODE with theme should throw
         var builder =
