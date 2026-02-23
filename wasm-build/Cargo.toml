@@ -15,7 +15,7 @@ crate-type = ["cdylib"]
 #     "lang-java"
 # ] }
 # full build
-lumis = { version = "0.1.2", features = ["all-languages"] }
+lumis = { version = "0.1.3", features = ["all-languages"] }
 strum = { version = "0.27", features = ["derive"] }
 
 [profile.release]

@@ -14,24 +14,30 @@ fmt:
 
 .PHONY: get-wasisdk
 get-wasisdk:
-	wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_SDK_VERSION}/wasi-sdk-${WASI_SDK_VERSION}.0-x86_64-linux.tar.gz
-	tar xvf wasi-sdk-${WASI_SDK_VERSION}.0-x86_64-linux.tar.gz
-	rm wasi-sdk-${WASI_SDK_VERSION}.0-x86_64-linux.tar.gz
-	mv wasi-sdk-${WASI_SDK_VERSION}.0-x86_64-linux ${PWD}/wasi-sdk
+	@if [ ! -d "$(PWD)/wasi-sdk" ]; then \
+		wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_SDK_VERSION}/wasi-sdk-${WASI_SDK_VERSION}.0-x86_64-linux.tar.gz && \
+		tar xvf wasi-sdk-${WASI_SDK_VERSION}.0-x86_64-linux.tar.gz && \
+		rm wasi-sdk-${WASI_SDK_VERSION}.0-x86_64-linux.tar.gz && \
+		mv wasi-sdk-${WASI_SDK_VERSION}.0-x86_64-linux $(PWD)/wasi-sdk; \
+	fi
 
 .PHONY: get-wizer
 get-wizer:
-	wget https://github.com/bytecodealliance/wizer/releases/download/v${WIZER_VERSION}/wizer-v${WIZER_VERSION}-x86_64-linux.tar.xz
-	tar xvf wizer-v${WIZER_VERSION}-x86_64-linux.tar.xz
-	rm wizer-v${WIZER_VERSION}-x86_64-linux.tar.xz
-	mv wizer-v${WIZER_VERSION}-x86_64-linux ${PWD}/wizer
+	@if [ ! -d "$(PWD)/wizer" ]; then \
+		wget https://github.com/bytecodealliance/wizer/releases/download/v${WIZER_VERSION}/wizer-v${WIZER_VERSION}-x86_64-linux.tar.xz && \
+		tar xvf wizer-v${WIZER_VERSION}-x86_64-linux.tar.xz && \
+		rm wizer-v${WIZER_VERSION}-x86_64-linux.tar.xz && \
+		mv wizer-v${WIZER_VERSION}-x86_64-linux $(PWD)/wizer; \
+	fi
 
 .PHONY: get-binaryen
 get-binaryen:
-	wget https://github.com/WebAssembly/binaryen/releases/download/version_${BINARYEN_VERSION}/binaryen-version_${BINARYEN_VERSION}-x86_64-linux.tar.gz
-	tar xvf binaryen-version_${BINARYEN_VERSION}-x86_64-linux.tar.gz
-	rm binaryen-version_${BINARYEN_VERSION}-x86_64-linux.tar.gz
-	mv binaryen-version_${BINARYEN_VERSION} ${PWD}/binaryen
+	@if [ ! -d "$(PWD)/binaryen" ]; then \
+		wget https://github.com/WebAssembly/binaryen/releases/download/version_${BINARYEN_VERSION}/binaryen-version_${BINARYEN_VERSION}-x86_64-linux.tar.gz && \
+		tar xvf binaryen-version_${BINARYEN_VERSION}-x86_64-linux.tar.gz && \
+		rm binaryen-version_${BINARYEN_VERSION}-x86_64-linux.tar.gz && \
+		mv binaryen-version_${BINARYEN_VERSION} $(PWD)/binaryen; \
+	fi
 
 .PHONY: build
 build:

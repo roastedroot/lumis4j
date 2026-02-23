@@ -25,9 +25,14 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         java-version: [11, 25]
-        
+
     steps:
     - uses: actions/checkout@v6
+
+    - name: Download WASM
+      run: gh release download wasm --pattern lumis.wasm
+      env:
+        GH_TOKEN: ${{ github.token }}
 
     - name: Set up Java
       uses: actions/setup-java@v5

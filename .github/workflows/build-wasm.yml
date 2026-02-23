@@ -1,0 +1,38 @@
+name: Build WASM
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-wasip1
+
+      - name: Create swap
+        run: |
+          sudo fallocate -l 10G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+
+      - name: Build WASM
+        run: make all
+        working-directory: wasm-build
+        env:
+          CARGO_BUILD_JOBS: "1"
+
+      - name: Upload WASM to release
+        run: |
+          gh release upload wasm lumis.wasm --clobber || \
+          gh release create wasm lumis.wasm --title "WASM Binary" --notes "Pre-built lumis.wasm binary"
+        env:
+          GH_TOKEN: ${{ github.token }}
