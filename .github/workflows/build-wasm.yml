@@ -17,14 +17,17 @@ jobs:
         with:
           targets: wasm32-wasip1
 
-      - name: Create swap
+      - name: Free memory and create swap
         run: |
+          sudo systemctl stop docker.service docker.socket containerd.service || true
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/share/boost "$AGENT_TOOLSDIRECTORY"
           sudo swapoff /swapfile 2>/dev/null || true
           sudo rm -f /swapfile
-          sudo fallocate -l 10G /mnt/swapfile
+          sudo fallocate -l 20G /mnt/swapfile
           sudo chmod 600 /mnt/swapfile
           sudo mkswap /mnt/swapfile
           sudo swapon /mnt/swapfile
+          sudo sysctl vm.swappiness=100
 
       - name: Build WASM
         run: make all
