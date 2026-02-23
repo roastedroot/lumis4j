@@ -59,5 +59,13 @@ release:
 .PHONY: local
 local: build optimize release
 
+.PHONY: upload
+upload:
+	gh release upload wasm ../lumis.wasm --clobber || \
+	gh release create wasm ../lumis.wasm --title "WASM Binary" --notes "Pre-built lumis.wasm binary" --repo $(shell gh repo view --json nameWithOwner -q .nameWithOwner)
+
 .PHONY: all
 all: get-wasisdk get-wizer get-binaryen local
+
+.PHONY: all-and-upload
+all-and-upload: all upload

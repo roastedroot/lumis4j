@@ -159,14 +159,22 @@ Three output formats are supported:
 ## Building from Source
 
 ```bash
-# Build the WASM module
-cd wasm-build
-make local
-
-# Build the Java library
-cd ..
+# Build the Java library (downloads pre-built WASM from GitHub Release)
 mvn clean install
 ```
+
+### Updating the lumis crate
+
+When a new version of [lumis](https://github.com/leandrocp/lumis) is released:
+
+1. Update the version in `wasm-build/Cargo.toml`
+2. Rebuild and upload the WASM binary:
+   ```bash
+   cd wasm-build
+   make all-and-upload
+   ```
+3. Update the Java sources if needed (new languages, themes, etc.)
+4. Run the tests: `mvn clean install`
 
 ## Acknowledgements
 
