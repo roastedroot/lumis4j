@@ -16,7 +16,7 @@ crate-type = ["cdylib"]
 # ] }
 # full build
 lumis = { version = "0.1.3", features = ["all-languages"] }
-strum = { version = "0.27", features = ["derive"] }
+strum = { version = "0.28", features = ["derive"] }
 
 [profile.release]
 opt-level = 'z'
