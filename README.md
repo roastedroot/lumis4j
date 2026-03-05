@@ -1,7 +1,5 @@
 # Lumis4J
 
-> **⚠️ WORK IN PROGRESS** - This project is currently under active development.
-
 **Syntax Highlighter powered by Tree-sitter and Neovim themes - Java Edition**
 
 **70+ languages. 120+ themes. Pure Java execution via WebAssembly.**
