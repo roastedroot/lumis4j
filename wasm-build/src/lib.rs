@@ -1,12 +1,10 @@
 extern crate lumis;
-extern crate strum;
 
 mod bbcode;
 
 use std::ptr;
 
 use lumis::{languages::Language, themes, HtmlInlineBuilder, HtmlLinkedBuilder, TerminalBuilder};
-use strum::IntoEnumIterator;
 use bbcode::BBCode;
 
 // Import malloc and free from WASI-SDK C library
