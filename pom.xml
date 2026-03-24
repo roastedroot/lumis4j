@@ -64,7 +64,7 @@
     <approvaltests.version>30.0.0</approvaltests.version>
 
     <!-- runtime versions -->
-    <chicory.version>999-SNAPSHOT</chicory.version>
+    <chicory.version>1.7.5</chicory.version>
   </properties>
 
   <build>
