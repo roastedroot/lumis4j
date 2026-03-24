@@ -74,32 +74,33 @@
               <wasmFile>../lumis.wasm</wasmFile>
               <!-- <interpreterFallback>WARN</interpreterFallback> -->
               <interpretedFunctions>
-                <function>625</function>
-                <function>627</function>
-                <function>630</function>
-                <function>636</function>
-                <function>659</function>
-                <function>670</function>
-                <function>683</function>
-                <function>691</function>
-                <function>696</function>
-                <function>704</function>
-                <function>714</function>
-                <function>843</function>
-                <function>885</function>
-                <function>920</function>
-                <function>939</function>
-                <function>953</function>
-                <function>961</function>
-                <function>962</function>
-                <function>1072</function>
-                <function>1075</function>
-                <function>1096</function>
-                <function>1104</function>
-                <function>1108</function>
-                <function>1115</function>
-                <function>1140</function>
-                <function>918</function>
+                <function>369</function>
+                <function>372</function>
+                <function>374</function>
+                <function>377</function>
+                <function>383</function>
+                <function>385</function>
+                <function>408</function>
+                <function>421</function>
+                <function>432</function>
+                <function>440</function>
+                <function>448</function>
+                <function>453</function>
+                <function>463</function>
+                <function>525</function>
+                <function>567</function>
+                <function>600</function>
+                <function>602</function>
+                <function>621</function>
+                <function>635</function>
+                <function>643</function>
+                <function>644</function>
+                <function>745</function>
+                <function>766</function>
+                <function>774</function>
+                <function>778</function>
+                <function>785</function>
+                <function>810</function>
               </interpretedFunctions>
             </configuration>
           </execution>

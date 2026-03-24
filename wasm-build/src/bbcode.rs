@@ -64,7 +64,7 @@ impl Formatter for BBCode {
             source,
             self.lang,
             self.theme.clone(),
-            |text, _range, scope, _style| {
+            |text, _lang, _range, scope, _style| {
                 let bbcode_text = wrap_with_bbcode(text, scope);
                 write!(output, "{}", bbcode_text)
             },
