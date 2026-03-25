@@ -201,15 +201,15 @@ checksum = "92ecc6618181def0457392ccd0ee51198e065e016d1d527a7ac1b6dc7c1f09d2"
 name = "lumis"
 version = "0.1.0"
 dependencies = [
- "lumis 0.2.0",
+ "lumis 0.2.1",
  "strum",
 ]
 
 [[package]]
 name = "lumis"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6e255b1bdadb7f4970425d18d2cfca8fc3ea5e628910103fc51e2c7460537070"
+checksum = "a29611000fde76ae549a7702b1f757c227a74d164fe02b3c4e736d3339b7cdde"
 dependencies = [
  "anyhow",
  "cc",
