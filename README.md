@@ -56,12 +56,14 @@ import io.roastedroot.lumis4j.core.Lumis;
 import io.roastedroot.lumis4j.core.Lang;
 import io.roastedroot.lumis4j.core.Theme;
 
-var lumis = Lumis.builder()
+var lumis = Lumis.builder().build();
+
+var highlighter = lumis.highlighter()
     .withLang(Lang.JAVASCRIPT)
     .withTheme(Theme.DRACULA)
     .build();
 
-var result = lumis.highlight("console.log('Hello, World!');");
+var result = highlighter.highlight("console.log('Hello, World!');");
 System.out.println(result.string());
 
 lumis.close();
@@ -75,16 +77,18 @@ import io.roastedroot.lumis4j.core.Lang;
 import io.roastedroot.lumis4j.core.Theme;
 import io.roastedroot.lumis4j.core.Formatter;
 
-var htmlLumis = Lumis.builder()
+var lumis = Lumis.builder().build();
+
+var htmlHighlighter = lumis.highlighter()
     .withLang(Lang.JAVA)
     .withTheme(Theme.CATPPUCCIN_FRAPPE)
     .withFormatter(Formatter.HTML_INLINE)
     .build();
 
-var htmlResult = htmlLumis.highlight("public class Hello { }");
+var htmlResult = htmlHighlighter.highlight("public class Hello { }");
 System.out.println(htmlResult.string());
 
-htmlLumis.close();
+lumis.close();
 ```
 
 ### HTML Linked Formatter
@@ -94,15 +98,17 @@ import io.roastedroot.lumis4j.core.Lumis;
 import io.roastedroot.lumis4j.core.Lang;
 import io.roastedroot.lumis4j.core.Formatter;
 
-var linkedLumis = Lumis.builder()
+var lumis = Lumis.builder().build();
+
+var linkedHighlighter = lumis.highlighter()
     .withLang(Lang.RUST)
     .withFormatter(Formatter.HTML_LINKED)
     .build();
 
-var linkedResult = linkedLumis.highlight("fn main() {}");
+var linkedResult = linkedHighlighter.highlight("fn main() {}");
 System.out.println(linkedResult.string());
 
-linkedLumis.close();
+lumis.close();
 ```
 
 ## How It Works
