@@ -70,33 +70,48 @@
               <moduleInterface>io.roastedroot.lumis4j.core.Lumis</moduleInterface>
               <!-- <interpreterFallback>WARN</interpreterFallback> -->
               <interpretedFunctions>
-                <function>369</function>
-                <function>372</function>
-                <function>374</function>
-                <function>377</function>
-                <function>383</function>
+                <function>364</function>
+                <function>381</function>
                 <function>385</function>
-                <function>408</function>
+                <function>388</function>
+                <function>394</function>
+                <function>396</function>
+                <function>419</function>
                 <function>421</function>
-                <function>432</function>
-                <function>440</function>
-                <function>448</function>
-                <function>453</function>
-                <function>463</function>
-                <function>525</function>
-                <function>567</function>
-                <function>600</function>
-                <function>602</function>
+                <function>442</function>
+                <function>457</function>
+                <function>465</function>
+                <function>470</function>
+                <function>480</function>
+                <function>550</function>
+                <function>588</function>
+                <function>589</function>
+                <function>591</function>
                 <function>621</function>
-                <function>635</function>
-                <function>643</function>
-                <function>644</function>
-                <function>745</function>
-                <function>766</function>
-                <function>774</function>
-                <function>778</function>
-                <function>785</function>
-                <function>810</function>
+                <function>639</function>
+                <function>691</function>
+                <function>724</function>
+                <function>746</function>
+                <function>753</function>
+                <function>764</function>
+                <function>789</function>
+                <function>803</function>
+                <function>811</function>
+                <function>812</function>
+                <function>825</function>
+                <function>827</function>
+                <function>833</function>
+                <function>937</function>
+                <function>940</function>
+                <function>963</function>
+                <function>969</function>
+                <function>987</function>
+                <function>991</function>
+                <function>998</function>
+                <function>1005</function>
+                <function>1023</function>
+                <function>1044</function>
+                <function>1056</function>
               </interpretedFunctions>
             </configuration>
           </execution>
