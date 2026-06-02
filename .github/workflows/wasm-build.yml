@@ -17,18 +17,47 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
 
     steps:
     - uses: actions/checkout@v6
+
+    - name: Setup swap
+      run: |
+        sudo swapoff /swapfile || true
+        sudo rm -f /swapfile
+        sudo fallocate -l 12G /swapfile
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
 
     - name: Install Rust
       uses: dtolnay/rust-toolchain@stable
       with:
         targets: wasm32-wasip1
 
+    - name: Cache Cargo
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          wasm-build/target
+        key: wasm-cargo-${{ hashFiles('wasm-build/Cargo.lock') }}
+        restore-keys: wasm-cargo-
+
+    - name: Cache build tools
+      uses: actions/cache@v4
+      with:
+        path: |
+          wasm-build/wasi-sdk
+          wasm-build/wizer
+          wasm-build/binaryen
+        key: wasm-tools-wasisdk29-wizer10.0.0-binaryen125
+
     - name: Build WASM
       working-directory: wasm-build
-      run: make all
+      run: CARGO_BUILD_JOBS=1 make all
 
     - name: Upload WASM to release
       working-directory: wasm-build
