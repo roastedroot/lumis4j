@@ -6,79 +6,118 @@ import java.util.Map;
 public enum Lang {
     PLAINTEXT(""),
     ANGULAR("angular"),
+    ARDUINO("arduino"),
     ASSEMBLY("asm"),
     ASTRO("astro"),
     BASH("bash"),
+    BICEP("bicep"),
     C("c"),
     CADDY("caddy"),
     CLOJURE("clojure"),
+    CMAKE("cmake"),
     COMMENT("comment"),
     COMMON_LISP("commonlisp"),
     CPP("cpp"),
-    CMAKE("cmake"),
     C_SHARP("csharp"),
-    CSV("csv"),
     CSS("css"),
+    CSV("csv"),
+    D("d"),
     DART("dart"),
     DIFF("diff"),
     DOCKERFILE("dockerfile"),
+    DOT("dot"),
+    EDITORCONFIG("editorconfig"),
     EEX("eex"),
     EJS("ejs"),
-    ERB("erb"),
     ELIXIR("elixir"),
     ELM("elm"),
+    ERB("erb"),
     ERLANG("erlang"),
     FISH("fish"),
+    FORTRAN("fortran"),
     F_SHARP("fsharp"),
+    GITATTRIBUTES("gitattributes"),
+    GITIGNORE("gitignore"),
     GLEAM("gleam"),
     GLIMMER("glimmer"),
+    GLSL("glsl"),
     GO("go"),
     GRAPHQL("graphql"),
     HASKELL("haskell"),
     HCL("hcl"),
-    HEX("heex"),
+    HEEX("heex"),
     HTML("html"),
+    HTTP("http"),
     IEX("iex"),
+    INI("ini"),
     JAVA("java"),
+    JAVADOC("javadoc"),
     JAVASCRIPT("javascript"),
+    JINJA("jinja"),
+    JINJA_INLINE("jinja_inline"),
+    JQ("jq"),
     JSON("json"),
+    JSON5("json5"),
+    JULIA("julia"),
+    JUST("just"),
+    KDL("kdl"),
     KOTLIN("kotlin"),
     LATEX("latex"),
     LIQUID("liquid"),
     LLVM("llvm"),
     LUA("lua"),
-    OBJ_C("objc"),
-    OCAML("ocaml"),
-    OCAML_INTERFACE("ocaml_interface"),
-    PERL("perl"),
+    LUADOC("luadoc"),
     MAKE("make"),
     MARKDOWN("markdown"),
     MARKDOWN_INLINE("markdown_inline"),
+    MATLAB("matlab"),
+    MERMAID("mermaid"),
+    NGINX("nginx"),
+    NIM("nim"),
     NIX("nix"),
+    NUSHELL("nushell"),
+    OBJ_C("objc"),
+    OCAML("ocaml"),
+    OCAML_INTERFACE("ocaml_interface"),
+    PASCAL("pascal"),
+    PERL("perl"),
     PHP("php"),
     POWERSHELL("powershell"),
+    PRISMA("prisma"),
     PROTO_BUF("protobuf"),
+    PUPPET("puppet"),
     PYTHON("python"),
+    QMLJS("qmljs"),
     R("r"),
+    RACKET("racket"),
     REGEX("regex"),
+    RST("rst"),
     RUBY("ruby"),
     RUST("rust"),
     SCALA("scala"),
+    SCHEME("scheme"),
     SCSS("scss"),
+    SOLIDITY("solidity"),
     SQL("sql"),
     SURFACE("surface"),
     SVELTE("svelte"),
     SWIFT("swift"),
+    SYSTEM_VERILOG("systemverilog"),
+    TCL("tcl"),
+    TERRAFORM("terraform"),
     TOML("toml"),
-    TYPESCRIPT("typescript"),
     TSX("tsx"),
+    TYPESCRIPT("typescript"),
     TYPST("typst"),
+    VHDL("vhdl"),
     VIM("vim"),
     VUE("vue"),
     WAT("wat"),
+    WGSL("wgsl"),
     XML("xml"),
     YAML("yaml"),
-    ZIG("zig");
+    ZIG("zig"),
+    ZSH("zsh");
 
     private final String value;
 
@@ -100,18 +139,19 @@ public enum Lang {
         // Add aliases
         langs.put("text", PLAINTEXT);
         langs.put("plaintext", PLAINTEXT);
-        //        langs.put("assembly", ASSEMBLY);
-        //        langs.put("c++", CPP);
-        //        langs.put("c#", C_SHARP);
-        //        langs.put("docker", DOCKERFILE);
-        //        langs.put("f#", F_SHARP);
-        //        langs.put("ember", GLIMMER);
-        //        langs.put("handlebars", GLIMMER);
-        //        langs.put("terraform", HCL);
-        //        langs.put("jsx", JAVASCRIPT);
-        //        langs.put("objective-c", OBJ_C);
-        //        langs.put("viml", VIM);
-        //        langs.put("vimscript", VIM);
+        langs.put("assembly", ASSEMBLY);
+        langs.put("c++", CPP);
+        langs.put("c#", C_SHARP);
+        langs.put("docker", DOCKERFILE);
+        langs.put("f#", F_SHARP);
+        langs.put("ember", GLIMMER);
+        langs.put("handlebars", GLIMMER);
+        langs.put("jsx", JAVASCRIPT);
+        langs.put("js", JAVASCRIPT);
+        langs.put("ts", TYPESCRIPT);
+        langs.put("objective-c", OBJ_C);
+        langs.put("viml", VIM);
+        langs.put("vimscript", VIM);
     }
 
     public static Lang fromString(String lang) {
