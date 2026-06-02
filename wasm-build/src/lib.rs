@@ -1,11 +1,11 @@
 extern crate lumis;
 
-mod bbcode;
-
 use std::ptr;
 
-use lumis::{languages::Language, themes, HtmlInlineBuilder, HtmlLinkedBuilder, TerminalBuilder};
-use bbcode::BBCode;
+use lumis::{
+    languages::Language, themes, BBCodeScopedBuilder, HtmlInlineBuilder, HtmlLinkedBuilder,
+    TerminalBuilder,
+};
 
 // Import malloc and free from WASI-SDK C library
 extern "C" {
@@ -99,7 +99,12 @@ fn build_formatter(
         }
         4 => {
             // BBCode formatter
-            Box::new(BBCode::new(language, Some(theme)))
+            Box::new(
+                BBCodeScopedBuilder::new()
+                    .language(language)
+                    .build()
+                    .expect("Failed to build BBCode formatter"),
+            )
         }
         _ => {
             let error_msg = format!("error: invalid formatter type: {}. Valid types are: 1 (Terminal), 2 (HTML inline), 3 (HTML linked), 4 (BBCode)", formatter_type);
@@ -176,7 +181,11 @@ pub extern "C" fn init() {
         }
         
         // BBCode formatter
-        let bbcode_formatter = BBCode::new(language, Some(theme.clone()));
-        lumis::highlight("", bbcode_formatter);
+        if let Ok(formatter) = BBCodeScopedBuilder::new()
+            .language(language)
+            .build()
+        {
+            lumis::highlight("", formatter);
+        }
     }
 }

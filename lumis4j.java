@@ -115,7 +115,7 @@ public class lumis4j implements Callable<Integer> {
         EXT_TO_LANG.put("csv", Lang.CSV);
         EXT_TO_LANG.put("proto", Lang.PROTO_BUF);
         EXT_TO_LANG.put("eex", Lang.EEX);
-        EXT_TO_LANG.put("heex", Lang.HEX);
+        EXT_TO_LANG.put("heex", Lang.HEEX);
         EXT_TO_LANG.put("erb", Lang.ERB);
         EXT_TO_LANG.put("ejs", Lang.EJS);
         EXT_TO_LANG.put("svelte", Lang.SVELTE);
