@@ -1,0 +1,37 @@
+name: WASM Build
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'wasm-build/**'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        targets: wasm32-wasip1
+
+    - name: Build WASM
+      working-directory: wasm-build
+      run: make all
+
+    - name: Upload WASM to release
+      working-directory: wasm-build
+      run: make upload
+      env:
+        GH_TOKEN: ${{ github.token }}
