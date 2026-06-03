@@ -68,51 +68,7 @@
               <name>io.roastedroot.lumis4j.core.LumisModule</name>
               <wasmFile>../lumis.wasm</wasmFile>
               <moduleInterface>io.roastedroot.lumis4j.core.Lumis</moduleInterface>
-              <!-- <interpreterFallback>WARN</interpreterFallback> -->
-              <interpretedFunctions>
-                <function>364</function>
-                <function>381</function>
-                <function>385</function>
-                <function>388</function>
-                <function>394</function>
-                <function>396</function>
-                <function>419</function>
-                <function>421</function>
-                <function>442</function>
-                <function>457</function>
-                <function>465</function>
-                <function>470</function>
-                <function>480</function>
-                <function>550</function>
-                <function>588</function>
-                <function>589</function>
-                <function>591</function>
-                <function>621</function>
-                <function>639</function>
-                <function>691</function>
-                <function>724</function>
-                <function>746</function>
-                <function>753</function>
-                <function>764</function>
-                <function>789</function>
-                <function>803</function>
-                <function>811</function>
-                <function>812</function>
-                <function>825</function>
-                <function>827</function>
-                <function>833</function>
-                <function>937</function>
-                <function>940</function>
-                <function>963</function>
-                <function>969</function>
-                <function>987</function>
-                <function>991</function>
-                <function>998</function>
-                <function>1005</function>
-                <function>1023</function>
-                <function>1044</function>
-                <function>1056</function>
-              </interpretedFunctions>
+              <interpreterFallback>WARN</interpreterFallback>
             </configuration>
           </execution>
         </executions>
