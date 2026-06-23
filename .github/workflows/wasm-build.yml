@@ -37,7 +37,7 @@ jobs:
         targets: wasm32-wasip1
 
     - name: Cache Cargo
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: |
           ~/.cargo/registry
@@ -47,7 +47,7 @@ jobs:
         restore-keys: wasm-cargo-
 
     - name: Cache build tools
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: |
           wasm-build/wasi-sdk
