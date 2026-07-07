@@ -2,7 +2,7 @@
 
 **Syntax Highlighter powered by Tree-sitter and Neovim themes - Java Edition**
 
-**70+ languages. 120+ themes. Pure Java execution via WebAssembly.**
+**110+ languages. 250+ themes. Pure Java execution via WebAssembly.**
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.roastedroot/lumis4j)](https://central.sonatype.com/artifact/io.roastedroot/lumis4j)
 
@@ -10,11 +10,11 @@
 
 ## Features
 
-* **70+ Tree-sitter languages** - Fast and accurate syntax parsing
-* **120+ Neovim themes** - Updated and curated themes from the Neovim community
+* **110+ Tree-sitter languages** - Fast and accurate syntax parsing
+* **250+ Neovim themes** - Updated and curated themes from the Neovim community
 * **Multiple outputs** - HTML (inline/linked), Terminal (ANSI)
 * **Language auto-detection** - File extension and shebang support
-* **Pure Java execution** - Tree-sitter runs in Java via WebAssembly (WASM) using [Chicory](https://github.com/dylibso/chicory)
+* **Pure Java execution** - Tree-sitter runs in Java via WebAssembly (WASM) using [Endive](https://endive.run)
 * **Zero config** - Works out of the box
 * **No native dependencies** - Everything runs in the JVM
 
@@ -116,7 +116,7 @@ lumis.close();
 Lumis4J brings the power of [lumis](https://github.com/leandrocp/lumis) to the Java ecosystem by:
 
 1. **Compiling lumis to WebAssembly** - The Rust-based lumis library is compiled to WASM
-2. **Running WASM in Java** - Using [Chicory](https://github.com/dylibso/chicory), a pure Java WebAssembly runtime
+2. **Running WASM in Java** - Using [Endive](https://endive.run), a pure Java WebAssembly runtime
 3. **No native dependencies** - Everything runs entirely within the JVM, no JNI or native libraries required
 
 This approach gives you:
@@ -127,7 +127,7 @@ This approach gives you:
 
 ## Supported Languages
 
-70+ languages including:
+110+ languages including:
 - JavaScript, TypeScript, TSX
 - Java, Kotlin, Scala
 - Rust, C, C++, C#
@@ -139,7 +139,7 @@ See the [`Lang`](core/src/main/java/io/roastedroot/lumis4j/core/Lang.java) enum 
 
 ## Supported Themes
 
-120+ themes from popular Neovim colorschemes:
+250+ themes from popular Neovim colorschemes:
 - GitHub Dark/Light
 - Dracula
 - Catppuccin (Mocha, Macchiato, Frappe, Latte)
@@ -186,7 +186,7 @@ This project is a Java wrapper of [lumis](https://github.com/leandrocp/lumis) by
 
 Special thanks to:
 - **[lumis](https://github.com/leandrocp/lumis)** - The original Rust implementation that powers this library
-- **[Chicory](https://github.com/dylibso/chicory)** - Pure Java WebAssembly runtime that makes this possible
+- **[Endive](https://endive.run)** - Pure Java WebAssembly runtime that makes this possible
 - **Tree-sitter** - The parsing library that provides fast and accurate syntax highlighting
 - **Neovim theme authors** - For the beautiful color schemes
 
