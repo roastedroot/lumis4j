@@ -1,9 +1,9 @@
 package io.roastedroot.lumis4j.core;
 
-import com.dylibso.chicory.runtime.ImportValues;
-import com.dylibso.chicory.runtime.Instance;
-import com.dylibso.chicory.wasi.WasiOptions;
-import com.dylibso.chicory.wasi.WasiPreview1;
+import run.endive.runtime.ImportValues;
+import run.endive.runtime.Instance;
+import run.endive.wasi.WasiOptions;
+import run.endive.wasi.WasiPreview1;
 
 public final class Lumis implements AutoCloseable {
     private final Instance instance;

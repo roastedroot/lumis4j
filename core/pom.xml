@@ -15,14 +15,14 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.dylibso.chicory</groupId>
+      <groupId>run.endive</groupId>
       <artifactId>runtime</artifactId>
-      <version>${chicory.version}</version>
+      <version>${endive.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.dylibso.chicory</groupId>
+      <groupId>run.endive</groupId>
       <artifactId>wasi</artifactId>
-      <version>${chicory.version}</version>
+      <version>${endive.version}</version>
     </dependency>
 
     <!-- ============= Testing ============= -->
@@ -55,9 +55,9 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>com.dylibso.chicory</groupId>
-        <artifactId>chicory-compiler-maven-plugin</artifactId>
-        <version>${chicory.version}</version>
+        <groupId>run.endive</groupId>
+        <artifactId>endive-compiler-maven-plugin</artifactId>
+        <version>${endive.version}</version>
         <executions>
           <execution>
             <id>lumis</id>
@@ -70,20 +70,6 @@
               <moduleInterface>io.roastedroot.lumis4j.core.Lumis</moduleInterface>
               <interpreterFallback>WARN</interpreterFallback>
             </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>checkstyle</id>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <phase>validate</phase>
           </execution>
         </executions>
       </plugin>
