@@ -64,7 +64,7 @@
     <approvaltests.version>30.1.1</approvaltests.version>
 
     <!-- runtime versions -->
-    <endive.version>1.0.0</endive.version>
+    <endive.version>1.0.1</endive.version>
   </properties>
 
   <build>
