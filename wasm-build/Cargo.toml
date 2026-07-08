@@ -15,7 +15,7 @@ crate-type = ["cdylib"]
 #     "lang-java"
 # ] }
 # full build
-lumis = { version = "0.9.0", features = ["all-languages"] }
+lumis = { version = "0.12.0", features = ["all-languages"] }
 
 [profile.release]
 opt-level = 'z'
